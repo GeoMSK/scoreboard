@@ -34,12 +34,12 @@ export class DataService {
   }
 
   submitFlag(flag: String): Observable<Boolean> {
-    var resp: Observable<HttpResponse<any>> = this.http.post<any>(this.flagUrl, {flag: flag}, httpOptions);
-    return resp.pipe(map(httpResponse => httpResponse.status == 200));
+    var resp: Observable<any> = this.http.post<any>(this.flagUrl, {flag: flag}, httpOptions);
+    return resp.pipe(map(resp => resp.success == true ));
   }
 
   sumbitScoreboardEntry(flag: String, name: String): Observable<{}> {
-    return this.http.post<{}>(this.scoreboardEntryUrl, {flag, name}, httpOptions);
+    return this.http.post<{}>(this.scoreboardEntryUrl, {flag: flag, name: name}, httpOptions);
   }
 
 

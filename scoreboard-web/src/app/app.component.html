@@ -4,8 +4,8 @@
       <h1 class="title my-5 pb-5"> {{ title }} </h1>
 
       <form>
-        <input id="flag-input" type="text" [(value)]="flag"/>
-        <button type="button" class="btn btn-primary" (click)="flagSubmit()">Submit</button>
+        <input id="flag-input" type="text" (input)="onFlagUpdate($event)"/>
+        <button type="button" class="btn btn-primary" (click)="onFlagSubmit()">Submit</button>
       </form>
     </div>
   </div>

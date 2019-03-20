@@ -22,8 +22,12 @@ export class AppComponent {
     });
   }
 
-  flagSubmit() {
-    console.log(this.flag);
+  onFlagUpdate(event: Event) {
+    this.flag = (<HTMLInputElement>event.target).value;
+  }
+
+  onFlagSubmit() {
+    console.log(`flag: ${this.flag}`);
     this.dataService.submitFlag(this.flag).subscribe(success => alert(success));
   }
 } 

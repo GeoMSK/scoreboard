@@ -28,10 +28,18 @@ public class DataController {
 
 	@PostMapping(path = {"/submitFlag"})
 	public Success submitFlag(@RequestBody FlagSubmission flagSubmission) {
-		System.out.println(flagSubmission.getFlag());
+		System.out.println("flag received: " + flagSubmission.getFlag());
+		if(!validateFlag(flagSubmission.getFlag())) {
+			return new Success(false);
+		}
+		if (flagSubmission.getName() != null && !flagSubmission.getName().equals("")) {
+			// TODO: new entry
+		}
+		return new Success(true);
+	}
+
+	private boolean validateFlag(String flag) {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-		boolean flagCorrect = bcrypt.matches(flagSubmission.getFlag(), challengeFlagHash);
-		return new Success(flagCorrect);
+		return bcrypt.matches(flag, challengeFlagHash);
 	}
 }
-git

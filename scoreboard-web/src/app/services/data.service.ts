@@ -34,7 +34,7 @@ export class DataService {
   }
 
   submitFlag(flag: String): Observable<Boolean> {
-    var resp: Observable<HttpResponse<any>> = this.http.post<any>(this.flagUrl, flag, httpOptions);
+    var resp: Observable<HttpResponse<any>> = this.http.post<any>(this.flagUrl, {flag: flag}, httpOptions);
     return resp.pipe(map(httpResponse => httpResponse.status == 200));
   }
 

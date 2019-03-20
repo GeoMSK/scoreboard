@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-auto">
+      <h1 class="title my-5 pb-5"> {{ title }} </h1>
+
+      <form>
+        <input id="flag-input" type="text" [(value)]="flag"/>
+        <button type="button" class="btn btn-primary" (click)="flagSubmit()">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-7">
+      <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="rank">
+          <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
+          <mat-cell *matCellDef="let i=index">{{ i + 1 }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.name }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef>Solve Date</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.date | date: 'dd/MM/yyyy hh:mm:ss' }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

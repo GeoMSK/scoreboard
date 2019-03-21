@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Congratulations!</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <p>You have successfully solved the challege. Do you want to enter your name in the scoreboard?</p>
+    <mat-form-field>
+        <input matInput
+                placeholder="Name"
+               formControlName="name">
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button (click)="close()">No thanks</button>
+    <button mat-raised-button (click)="save()">Submit to scoreboard</button>
+</mat-dialog-actions>

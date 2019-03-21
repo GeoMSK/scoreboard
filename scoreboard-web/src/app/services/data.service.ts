@@ -21,7 +21,6 @@ export class DataService {
 
   private entriesUrl = "http://localhost:8080/api/entries";
   private flagUrl = "http://localhost:8080/api/submitFlag";
-  private scoreboardEntryUrl = "http://localhost:8080/api/scoreboardEntryUrl"
 
   constructor(private http: HttpClient) { }
 
@@ -39,7 +38,7 @@ export class DataService {
   }
 
   sumbitScoreboardEntry(flag: String, name: String): Observable<{}> {
-    return this.http.post<{}>(this.scoreboardEntryUrl, {flag: flag, name: name}, httpOptions);
+    return this.http.post<{}>(this.flagUrl, {flag: flag, name: name}, httpOptions);
   }
 
 

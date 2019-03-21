@@ -13,7 +13,7 @@ import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
 
 export class AppComponent {
   flag: String = "";
-  title = 'Test';
+  title = 'Crypto Challenge';
   displayedColumns = ["rank", "name", "date"]
   dataSource: Entry[];
 
@@ -34,7 +34,6 @@ export class AppComponent {
   }
 
   onFlagSubmit() {
-    console.log(`flag: ${this.flag}`);
     this.dataService.submitFlag(this.flag).subscribe(success => {
       if (success) {
         this.scoreSubmit();
@@ -49,12 +48,10 @@ export class AppComponent {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    // dialogConfig.height = '400px';
-    // dialogConfig.width= '600px';
+    dialogConfig.width= '400px';
 
     let dialogRef = this.dialog.open(ScoreSubmitDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
-      console.log("Dialog output:", data);
       this.dataService.sumbitScoreboardEntry(this.flag, data.name).subscribe(result => this.refresh());
     });
   }

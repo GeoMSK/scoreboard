@@ -1,12 +1,91 @@
 p {
 	font-family: Lato;
   }
+
+  #upper {
+    // min-width: 450px;
+    background: url("../assets/img/padlock.jpg")no-repeat center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .red-overlay{
+    // background: rgba(255, 0, 0, 0.2);
+    // overflow: hidden;
+    // z-index: 2;
+}
+
+  #submit_text {
+    font-size: 1.5rem;
+  }
+
+  #scoreboard-container {
+    background-color: rgba(52,60,65,1);
+    min-height: 100vh;
+  }
   
   .title {
 	text-align: center;
   }
+
+  input:focus {
+    outline-color: green;
+}
   
   #flag-input {
 	width: 300px;
 	display: block;
+  }
+
+  #flag-submit {
+    display: inline-block;
+    background-color: rgba(50, 50, 50, 0.8);
+    border-color: black;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: rgb(118, 164, 101);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 30px
+  }
+
+  #flag-submit:hover {
+    background-color: black;
+  }
+
+  #scoreboard-container-title {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  mat-cell{
+    display:flex;
+    justify-content:center;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(52,60,65,1);
+  }
+
+  mat-header-row {
+    border-bottom-color:  rgba(52,60,65,0.8);
+  }
+
+  mat-row {
+    border-bottom-color: rgba(52,60,65,0.8);
+  }
+  
+  mat-header-cell {
+    display:flex;
+    justify-content:center;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(52,60,65,1.5);;
+  }
+
+  #no_submissions_message {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
   }

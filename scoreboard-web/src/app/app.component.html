@@ -26,7 +26,7 @@
           </form>
           <div *ngIf="!failureMsgHidden">
             <p class="pb-5 px-2"> {{ failureMessage }} </p>
-            <p><a id="try-again" class="g-link" (click)="backToForm()">Try again...</a></p>
+            <p class="g-link" (click)="backToForm()">Try again...</p>
           </div>
           <div *ngIf="!successMsgHidden">
             <h2 class="pb-5 font-weight-bold">Well done!</h2>

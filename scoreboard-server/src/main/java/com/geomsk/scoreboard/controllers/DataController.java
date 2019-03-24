@@ -33,15 +33,18 @@ public class DataController {
 	}
 
 	@PostMapping(path = {"/submitFlag"})
-	public Success submitFlag(@RequestBody FlagSubmission flagSubmission) {
+	public ResponseEntity<Void> submitFlag(@RequestBody FlagSubmission flagSubmission) {
 		System.out.println("flag received: " + flagSubmission.getFlag());
 		if (!validateFlag(flagSubmission.getFlag())) {
-			return new Success(false);
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+		if (repo.existsById(flagSubmission.getName())) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 		if (flagSubmission.getName() != null && !flagSubmission.getName().equals("")) {
 			repo.save(new Entry(flagSubmission.getName().trim(), Calendar.getInstance().getTime()));
 		}
-		return new Success(true);
+		return new ResponseEntity<>( HttpStatus.OK);
 	}
 
 	/**

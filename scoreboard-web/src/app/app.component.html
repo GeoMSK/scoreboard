@@ -1,20 +1,38 @@
 <section id="upper">
-  <div id="upper-container" class="container-fluid text-white d-flex flex-column red-overlay h-100">
+  <div id="upper-container" class="container-fluid text-white d-flex flex-column dark-overlay h-100">
     <div class="row">
       <div class="col">
         <h1 class="title display-3 my-4 pb-5 font-weight-bold"> {{ title }} </h1>
       </div>
     </div>
-    <div class="row d-flex flex-column align-items-center justify-content-center flex-fill">
-      <div class="col-auto my-auto display-4">
+    <div class="row d-flex align-items-center justify-content-center flex-fill">
+      <!-- <div class="col-auto my-auto display-4">
         <span class="font-weight-bold">Incorrect Flag!</span>
-      </div>
+      </div> -->
       <div class="col-auto text-center">
-        <p id="submit_text">Enter your flag</p>
-        <form class="my-4 pb-3">
-          <input class="mb-3" id="flag-input" type="text" (input)="onFlagUpdate($event)" />
-          <button id="flag-submit" type="button" type="submit" (click)="onFlagSubmit()">Submit</button>
-        </form>
+        <p id="submit_text">Solved it?<br />Enter the Hall of Fame</p>
+        <div id="flag-form-container" class="d-flex justify-content-center align-items-center" [ngStyle]="formContainerStyle">
+          <form id="flag-form" class="my-4 pb-3" [formGroup]="form"  [hidden]="formHidden">
+            <mat-form-field>
+              <input matInput placeholder="Your Name" formControlName="name">
+              <mat-error>Name required for the hall of fame</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Flag" formControlName="flag">
+              <mat-error>The flag is the plaintext</mat-error>
+            </mat-form-field>
+
+            <button id="flag-submit" type="button" type="submit" (click)="onFlagSubmit()" [disabled]="form.invalid">Submit</button>
+          </form>
+          <div *ngIf="!failureMsgHidden">
+            <p class="pb-5 px-2"> {{ failureMessage }} </p>
+            <p><a id="try-again" (click)="backToForm()">Try again...</a></p>
+          </div>
+          <div *ngIf="!successMsgHidden">
+            <h2 class="pb-5 font-weight-bold">Well done!</h2>
+              <p>You have successfully solved the challenge. </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -23,7 +41,7 @@
   <div id="scoreboard-container" class="container-fluid">
     <div class="row">
       <div class="col text-center py-5">
-        <h1 id="scoreboard-container-title" class="display-3 font-weight-bold">Scoreboard</h1>
+        <h1 id="scoreboard-container-title" class="display-3 font-weight-bold">Hall of Fame</h1>
       </div>
     </div>
     <div class="row d-flex h-100 justify-content-center align-items-center py-5">
@@ -47,7 +65,7 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
         </mat-table>
-        <div *ngIf="dataSource.length === 0" id="no_submissions_message" class="my-5 text-center">No submissions yet...</div>
+        <div *ngIf="dataSource.length === 0 || fetchError" id="no_submissions_message" class="my-5 text-center">{{ fetchError ? "Something went wrong... Please refresh the page in a few minutes." : "No submissions yet..."}} </div>
       </div>
     </div>
   </div>

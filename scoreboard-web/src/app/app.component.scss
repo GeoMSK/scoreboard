@@ -2,13 +2,23 @@
   font-family: 'Courier New', Courier, monospace;
  }
 
- #try-again {
+ .g-link {
    color: green;
  }
 
- #try-again:hover {
+ .g-link:hover {
    cursor: pointer;
+   text-decoration: underline;
  }
+
+ .w-link {
+  color: rgb(255, 255, 255);
+}
+
+.w-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 #upper {
   // min-width: 450px;

@@ -10,7 +10,7 @@
         <span class="font-weight-bold">Incorrect Flag!</span>
       </div> -->
       <div class="col-auto text-center">
-        <p id="submit_text">Solved it?<br />Enter the Hall of Fame</p>
+        <p id="submit_text">Solved it?<br /><span class="w-link font-weight-bold" (click)="scrollToElement(scoreboard)">Enter the Hall of Fame</span></p>
         <div id="flag-form-container" class="d-flex justify-content-center align-items-center" [ngStyle]="formContainerStyle">
           <form id="flag-form" class="my-4 pb-3" [formGroup]="form"  [hidden]="formHidden">
             <mat-form-field>
@@ -26,18 +26,19 @@
           </form>
           <div *ngIf="!failureMsgHidden">
             <p class="pb-5 px-2"> {{ failureMessage }} </p>
-            <p><a id="try-again" (click)="backToForm()">Try again...</a></p>
+            <p><a id="try-again" class="g-link" (click)="backToForm()">Try again...</a></p>
           </div>
           <div *ngIf="!successMsgHidden">
             <h2 class="pb-5 font-weight-bold">Well done!</h2>
               <p>You have successfully solved the challenge. </p>
+              <p class="g-link" (click)="scrollToElement(scoreboard)">View the Hall of Fame</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<section id="scoreboard">
+<section id="scoreboard" #scoreboard>
   <div id="scoreboard-container" class="container-fluid">
     <div class="row">
       <div class="col text-center py-5">

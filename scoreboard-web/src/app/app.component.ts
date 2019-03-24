@@ -114,4 +114,9 @@ export class AppComponent {
   //     this.dataService.sumbitScoreboardEntry(this.flag, data.name).subscribe(result => this.refresh());
   //   });
   // }
+
+  scrollToElement($element): void {
+    console.log($element);
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+  }
 } 

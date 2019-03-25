@@ -23,16 +23,17 @@ export class AppComponent {
   formHidden = false;
   successMsgHidden = true;
   failureMsgHidden = true;
-  failureMessage: String;
+  failureMessage: string;
   formContainerStyle = {};
   fetchError = false;
+  rank: string;
 
   form: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     flag: new FormControl('', Validators.required)
   });
 
-  
+
   constructor(private dataService: DataService, private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -44,12 +45,12 @@ export class AppComponent {
       this.dataSource = entries;
       this.fetchError = false;
     },
-    () => this.fetchError = true);
+      () => this.fetchError = true);
   }
 
-  private showError(failureMessage: String) {
+  private showError(failureMessage: string) {
     this.formHidden = true;
-    this.formContainerStyle = {"box-shadow": "0px 0px 30px rgba(255, 0, 0, 0.5)"};
+    this.formContainerStyle = { "box-shadow": "0px 0px 30px rgba(255, 0, 0, 0.5)" };
     this.failureMsgHidden = false;
     this.successMsgHidden = true;
     this.failureMessage = failureMessage;
@@ -57,9 +58,26 @@ export class AppComponent {
 
   private showSuccess() {
     this.formHidden = true;
-    this.formContainerStyle = {"box-shadow": "0px 0px 30px rgba(40, 255, 0, 0.5)"};
+    this.formContainerStyle = { "box-shadow": "0px 0px 30px rgba(40, 255, 0, 0.5)" };
     this.failureMsgHidden = true;
     this.successMsgHidden = false;
+    let suffix = "";
+    let r = this.dataSource.length + 1;
+    switch (r % 10) {
+      case 1:
+        suffix = r != 11 ? "st" : "th";
+        break;
+      case 2:
+        suffix = r != 12 ? "nd" : "th";
+        break;
+      case 3:
+        suffix = r != 13 ? "rd" : "th";
+        break;
+      default:
+        suffix = "th";
+        break;
+    }
+    this.rank = `${r}${suffix}`;
   }
 
   backToForm() {
@@ -88,18 +106,18 @@ export class AppComponent {
   onFlagSubmit() {
     console.log(this.form.value);
     this.dataService.submitFlag(this.form.value.flag, this.form.value.name).subscribe(() => {
-        this.showSuccess();
-        this.refresh();
+      this.showSuccess();
+      this.refresh();
     },
-    resp => {
-      if (resp.status == 417) { // flag incorrect
-        this.showError("This is not the correct flag. You need to try harder.");
-      } else if (resp.status == 409) { // name already exists
-        this.showError("You have solved the challenge, however, the name you entered already exists.");
-      } else { // connection error
-        this.showError("Something went wrong... Please try again in a few minutes.");
-      }
-    });
+      resp => {
+        if (resp.status == 417) { // flag incorrect
+          this.showError("This is not the correct flag. You need to try harder.");
+        } else if (resp.status == 409) { // name already exists
+          this.showError("You have solved the challenge, however, the name you entered already exists.");
+        } else { // connection error
+          this.showError("Something went wrong... Please try again in a few minutes.");
+        }
+      });
   }
 
   // private scoreSubmit() {
@@ -117,6 +135,6 @@ export class AppComponent {
 
   scrollToElement($element): void {
     console.log($element);
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   }
 } 

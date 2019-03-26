@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 })
 
 export class AppComponent {
+  title = "Crypto Challenge"
   displayedColumns = ["rank", "name", "date"]
   dataSource: Entry[] = [];
   formHidden = false;
@@ -96,7 +97,6 @@ export class AppComponent {
 
   onFlagSubmit() {
     this.dataService.submitFlag(this.form.value.flag, this.form.value.name).subscribe(resp => {
-      console.log(resp);
       this.showSuccess(resp.rank);
       this.refresh();
     },

@@ -79,22 +79,6 @@ export class AppComponent {
     this.successMsgHidden = true;
   }
 
-  // private toggleUI(success: boolean, failureMessage: String) {
-  //   if (!this.formHidden) {
-  //     this.formContainerStyle = success ? {"box-shadow": "0px 0px 30px rgba(40, 255, 0, 0.5)"} : {"box-shadow": "0px 0px 30px rgba(255, 0, 0, 0.5)"};
-  //     this.failureMsgHidden = success;
-  //     this.successMsgHidden = !success;
-  //     if (!success) {
-  //       this.failureMessage = failureMessage;
-  //     }
-  //   } else {
-  //     this.failureMsgHidden = true;
-  //     this.successMsgHidden = true;
-  //     this.formContainerStyle = {};
-  //   }
-  //   this.formHidden = !this.formHidden;
-  // }
-
   onFlagSubmit() {
     this.dataService.submitFlag(this.form.value.flag, this.form.value.name).subscribe(resp => {
       this.showSuccess(resp.rank);
@@ -110,19 +94,6 @@ export class AppComponent {
         }
       });
   }
-
-  // private scoreSubmit() {
-  //   const dialogConfig = new MatDialogConfig();
-
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.width= '400px';
-
-  //   let dialogRef = this.dialog.open(ScoreSubmitDialogComponent, dialogConfig);
-  //   dialogRef.afterClosed().subscribe(data => {
-  //     this.dataService.sumbitScoreboardEntry(this.flag, data.name).subscribe(result => this.refresh());
-  //   });
-  // }
 
   scrollToElement($element): void {
     $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Entry } from "../model/entry";
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { FlagResult } from '../model/flagResult'
 

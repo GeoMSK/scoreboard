@@ -9,7 +9,7 @@ import java.util.*;
 @ConfigurationProperties
 public class ConfigProperties {
 	private String challengeFlagHash;
-	private Set<String> whitelist;
+	private Set<String> whitelist = new HashSet<>();
 	private String baUser;
 	private String baPass;
 
@@ -22,7 +22,7 @@ public class ConfigProperties {
 	}
 
 	public Set<String> getWhitelist() {
-		return whitelist == null ? new HashSet<>() : whitelist;
+		return whitelist;
 	}
 
 	public void setWhitelist(Set<String> whitelist) {

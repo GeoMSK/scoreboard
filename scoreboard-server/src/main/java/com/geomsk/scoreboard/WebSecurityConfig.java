@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		HashSet<String> whitelist = new HashSet<>(props.getWhitelist());
 
-		http.addFilterBefore(new IpWhitelistFilter(whitelist), BasicAuthenticationFilter.class);
+		http.addFilterBefore(new IpWhitelistFilter(whitelist, props), BasicAuthenticationFilter.class);
 	}
 
 	@Bean

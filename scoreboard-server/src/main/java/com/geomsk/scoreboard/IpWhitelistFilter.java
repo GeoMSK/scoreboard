@@ -13,16 +13,15 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.Set;
 
-@Component
 public class IpWhitelistFilter extends GenericFilterBean {
 
-	@Autowired
 	private ConfigProperties props;
 
 	private Set<String> whitelist;
 
-	public IpWhitelistFilter(Set<String> whitelist) {
+	public IpWhitelistFilter(Set<String> whitelist, ConfigProperties props) {
 		this.whitelist = whitelist;
+		this.props = props;
 	}
 
 	@Override

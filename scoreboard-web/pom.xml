@@ -44,19 +44,19 @@
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>run build</arguments>
+              <arguments>run build-prod</arguments>
             </configuration>
           </execution>
-          <execution>
-            <id>prod</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <configuration>
-              <arguments>run-script build</arguments>
-            </configuration>
-            <phase>generate-resources</phase>
-          </execution>
+          <!--<execution>-->
+            <!--<id>prod</id>-->
+            <!--<goals>-->
+              <!--<goal>npm</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+              <!--<arguments>run-script build-prod</arguments>-->
+            <!--</configuration>-->
+            <!--<phase>generate-resources</phase>-->
+          <!--</execution>-->
         </executions>
       </plugin>
       <!--<plugin>-->

@@ -4,16 +4,15 @@ import com.geomsk.scoreboard.ConfigProperties;
 import com.geomsk.scoreboard.db.entities.Entry;
 import com.geomsk.scoreboard.db.repositories.EntryRepository;
 import com.geomsk.scoreboard.dto.FlagSubmission;
-import com.geomsk.scoreboard.dto.Success;
+import com.geomsk.scoreboard.dto.Rank;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -33,18 +32,32 @@ public class DataController {
 	}
 
 	@PostMapping(path = {"/submitFlag"})
-	public ResponseEntity<Void> submitFlag(@RequestBody FlagSubmission flagSubmission) {
-		System.out.println("flag received: " + flagSubmission.getFlag());
+	public ResponseEntity<Rank> submitFlag(@RequestBody FlagSubmission flagSubmission) {
+		/*
+		 * Flag Check
+		 */
 		if (!validateFlag(flagSubmission.getFlag())) {
 			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 		}
+
+		/*
+		 * Duplicate entry check
+		 */
 		if (repo.existsById(flagSubmission.getName())) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
+
+		/*
+		 * Successful submission
+		 */
 		if (flagSubmission.getName() != null && !flagSubmission.getName().equals("")) {
-			repo.save(new Entry(flagSubmission.getName().trim(), Calendar.getInstance().getTime()));
+			Date now = Calendar.getInstance().getTime();
+			repo.save(new Entry(flagSubmission.getName().trim(), now));
+			int rank = repo.getRank(now);
+			return new ResponseEntity<>(new Rank(rank), HttpStatus.OK);
 		}
-		return new ResponseEntity<>( HttpStatus.OK);
+
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	/**

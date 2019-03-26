@@ -1,23 +1,15 @@
 import { Component } from '@angular/core';
 import { DataService } from './services/data.service';
 import { Entry } from './model/entry';
-import { MatDialog, MatDialogConfig } from "@angular/material";
-import { ScoreSubmitDialogComponent } from './components/score-submit-dialog/score-submit-dialog.component';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [
-    // animation triggers go here
-  ]
+  styleUrls: ['./app.component.scss']
 })
 
 export class AppComponent {
-  title = 'Crypto Challenge';
   displayedColumns = ["rank", "name", "date"]
   dataSource: Entry[] = [];
   formHidden = false;
@@ -34,7 +26,7 @@ export class AppComponent {
   });
 
 
-  constructor(private dataService: DataService, private dialog: MatDialog) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.refresh();
@@ -56,28 +48,27 @@ export class AppComponent {
     this.failureMessage = failureMessage;
   }
 
-  private showSuccess() {
+  private showSuccess(rank: number) {
     this.formHidden = true;
     this.formContainerStyle = { "box-shadow": "0px 0px 30px rgba(40, 255, 0, 0.5)" };
     this.failureMsgHidden = true;
     this.successMsgHidden = false;
     let suffix = "";
-    let r = this.dataSource.length + 1;
-    switch (r % 10) {
+    switch (rank % 10) {
       case 1:
-        suffix = r != 11 ? "st" : "th";
+        suffix = rank != 11 ? "st" : "th";
         break;
       case 2:
-        suffix = r != 12 ? "nd" : "th";
+        suffix = rank != 12 ? "nd" : "th";
         break;
       case 3:
-        suffix = r != 13 ? "rd" : "th";
+        suffix = rank != 13 ? "rd" : "th";
         break;
       default:
         suffix = "th";
         break;
     }
-    this.rank = `${r}${suffix}`;
+    this.rank = `${rank}${suffix}`;
   }
 
   backToForm() {
@@ -104,9 +95,9 @@ export class AppComponent {
   // }
 
   onFlagSubmit() {
-    console.log(this.form.value);
-    this.dataService.submitFlag(this.form.value.flag, this.form.value.name).subscribe(() => {
-      this.showSuccess();
+    this.dataService.submitFlag(this.form.value.flag, this.form.value.name).subscribe(resp => {
+      console.log(resp);
+      this.showSuccess(resp.rank);
       this.refresh();
     },
       resp => {
@@ -134,7 +125,6 @@ export class AppComponent {
   // }
 
   scrollToElement($element): void {
-    console.log($element);
     $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   }
 } 

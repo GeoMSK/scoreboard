@@ -10,21 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
-import { ScoreSubmitDialogComponent } from './components/score-submit-dialog/score-submit-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ScoreSubmitDialogComponent
+    AppComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, MatTableModule, HttpClientModule, MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule,
      FormsModule, ReactiveFormsModule, 
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    ScoreSubmitDialogComponent
-  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

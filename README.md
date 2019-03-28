@@ -50,7 +50,7 @@ For example you may want to allow unrestricted access from one location (home/co
 
 ## How to run
 Download the [latest release](https://github.com/GeoMSK/scoreboard/releases/download/v1.0.0/scoreboard-server-1.0.0.zip)  
-Extract the contents of the archive, configure application.properties (see [configuration](https://github.com/GeoMSK/scoreboard/new/master?readme=1#configuration)) and then run
+Extract the contents of the archive, configure application.properties (see [configuration](https://github.com/GeoMSK/scoreboard#configuration)) and then run
 ```
 java -Djava.net.preferIPv4Stack=true -jar ./scoreboard-server-1.0.0.jar
 ```
